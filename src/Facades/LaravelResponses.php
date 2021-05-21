@@ -1,6 +1,6 @@
 <?php
 
-namespace Egeatech\LaravelResponses\Facades;
+namespace EgeaTech\LaravelResponses\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

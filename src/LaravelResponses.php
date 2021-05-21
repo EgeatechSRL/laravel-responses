@@ -1,5 +1,5 @@
 <?php
 
-namespace Egeatech\LaravelResponses;
+namespace EgeaTech\LaravelResponses;
 
 class LaravelResponses {}
