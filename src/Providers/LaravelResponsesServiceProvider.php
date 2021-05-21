@@ -3,7 +3,7 @@
 namespace EgeaTech\LaravelResponses\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Egeatech\LaravelResponses\LaravelResponses;
+use EgeaTech\LaravelResponses\LaravelResponses;
 
 class LaravelResponsesServiceProvider extends ServiceProvider
 {
