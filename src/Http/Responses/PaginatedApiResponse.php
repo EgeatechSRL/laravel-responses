@@ -15,7 +15,7 @@ class PaginatedApiResponse extends JsonResponse
             throw new \RuntimeException("Class [{$responseFormatter}] does not exist");
         }
 
-        if (!(new ($responseFormatter(null))) instanceof JsonResource) {
+        if (!((new $responseFormatter(null)) instanceof JsonResource)) {
             throw new \RuntimeException("Class [{$responseFormatter}] should be an instance of " . JsonResource::class);
         }
 
