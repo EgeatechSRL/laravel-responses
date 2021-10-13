@@ -2,6 +2,10 @@
 
 All notable changes to `LaravelResponses` will be documented in this file.
 
+## Version 2.0.2
+### Fixed
+- Syntax error in `*Response` classes
+
 ## Version 2.0.1
 ### Updated
 - `README.md` file to describe new package usage
