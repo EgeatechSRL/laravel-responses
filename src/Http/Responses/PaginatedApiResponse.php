@@ -3,18 +3,24 @@
 namespace EgeaTech\LaravelResponses\Http\Responses;
 
 use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use EgeaTech\LaravelExceptions\Interfaces\Exceptions\LogicErrorException;
 
 class PaginatedApiResponse extends JsonResponse
 {
-    public function __construct(LengthAwarePaginator $paginatorData, Request $incomingRequest, JsonResource $jsonResource, $status = self::HTTP_OK, ?LogicErrorException $logicException = null)
+    public function __construct(LengthAwarePaginator $paginatorData, string $responseFormatter, $httpStatus = self::HTTP_OK, ?LogicErrorException $logicException = null)
     {
-        $resourceClass = get_class($jsonResource);
+        if (!class_exists($responseFormatter)) {
+            throw new \RuntimeException("Class [{$responseFormatter}] does not exist");
+        }
+
+        if (!(new ($responseFormatter(null))) instanceof JsonResource) {
+            throw new \RuntimeException("Class [{$responseFormatter}] should be an instance of " . JsonResource::class);
+        }
+
         $responseObject = [
-            'success' => $status < self::HTTP_BAD_REQUEST,
+            'success' => $httpStatus < self::HTTP_BAD_REQUEST,
             'pagination' => [
                 'total' => $paginatorData->total(),
 
@@ -27,14 +33,11 @@ class PaginatedApiResponse extends JsonResponse
                 'next_page_url' => $paginatorData->nextPageUrl(),
                 'previous_page_url' => $paginatorData->previousPageUrl(),
             ],
-            'data' => array_map(
-                fn($paginationItem): array => (new $resourceClass($paginationItem))->toArray($incomingRequest),
-                $paginatorData->items()
-            ),
+            'data' => $responseFormatter::collection($paginatorData->items()),
         ];
 
         if ($logicException) {
-            $status = $logicException->getCode();
+            $httpStatus = $logicException->getCode();
             $responseObject['errors'] = [
                 'general_error' => [$logicException->getMessageKey()]
             ];
@@ -42,6 +45,6 @@ class PaginatedApiResponse extends JsonResponse
             $responseObject['errors'] = [];
         }
 
-        parent::__construct($responseObject, $status);
+        parent::__construct($responseObject, $httpStatus);
     }
 }
