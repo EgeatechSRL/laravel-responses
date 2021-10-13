@@ -2,6 +2,10 @@
 
 All notable changes to `LaravelResponses` will be documented in this file.
 
+## Version 2.0.1
+### Updated
+- `README.md` file to describe new package usage
+
 ## Version 2.0.0
 ### Updated
 - Backport library support also for Laravel 6.x

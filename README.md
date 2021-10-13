@@ -7,7 +7,7 @@ A package to provide some standardized response classes.
 
 ## Installation
 
-This package supports Laravel 7 and 8 but requires **at least** PHP 7.4. 
+This package supports Laravel 6, 7 and 8 but requires **at least** PHP 7.4. 
 
 Via Composer
 
@@ -25,17 +25,14 @@ Here is the constructor for `ApiResponse`:
 
 ```php
 public function __construct(
-    # Either null or a valid Eloquent model instance
-    ?\Illuminate\Database\Eloquent\Model $modelInstance,
-    
-    # The incoming request instance
-    \Symfony\Component\HttpFoundation\Request $incomingRequest,
-    
-    # An empty JSON api resource instance, to be used to know how to map response data
-    \Illuminate\Http\Resources\Json\JsonResource $jsonResource,
+    # Either null, a valid Eloquent model or an \Illuminate\Support\Collection instance
+    ?\Illuminate\Database\Eloquent\Model $responseData,
+
+    # A classFQN extending Laravel JsonResource instance, to be used to know how to map response data
+    string $responseFormatter,
     
     # A valid HTTP status code, to be returned to the caller
-    int $status = \Illuminate\Http\JsonResponse::HTTP_OK,
+    int $httpStatus = \Illuminate\Http\JsonResponse::HTTP_OK,
     
     # An optional ApplicationException instance, to properly provide a valid error message representation
     ?\EgeaTech\LaravelExceptions\Interfaces\Exceptions\LogicErrorException $logicException = null 
@@ -48,15 +45,12 @@ And here the one for `PaginatedApiResponse` class:
 public function __construct(
     # A standard Laravel paginator instance, holding both data and pagination information
     \Illuminate\Contracts\Pagination\LengthAwarePaginator $paginatorData,
-    
-    # The incoming request instance
-    \Symfony\Component\HttpFoundation\Request $incomingRequest,
-    
-    # An empty JSON api resource instance, to be used to know how to map response data
-    \Illuminate\Http\Resources\Json\JsonResource $jsonResource,
+
+    # A classFQN extending Laravel JsonResource instance, to be used to know how to map response data
+    string $responseFormatter,
     
     # A valid HTTP status code, to be returned to the caller
-    int $status = \Illuminate\Http\JsonResponse::HTTP_OK,
+    int $httpStatus = \Illuminate\Http\JsonResponse::HTTP_OK,
     
     # An optional ApplicationException instance, to properly provide a valid error message representation
     ?\EgeaTech\LaravelExceptions\Interfaces\Exceptions\LogicErrorException $logicException = null 
@@ -91,8 +85,7 @@ class TestController extends Controller
 
         return new ApiResponse(
             $databaseModel,
-            $request,
-            new DatabaseModelResource(null),
+            DatabaseModelResource::class,
             $occurredException
                 ? $occurredException->getCode()
                 : ApiResponse::HTTP_ACCEPTED,
@@ -119,6 +112,7 @@ If you discover any security related issues, please email author email instead o
 ## Credits
 
 - [Egea Tecnologie Informatiche][link-author]
+- [Enrico Bagattin](mailto:e.bagattin@egeatech.com)
 - [Marco Guidolin](mailto:m.guidolin@egeatech.com)
 
 ## License
@@ -130,5 +124,4 @@ The software is licensed under MIT. Please see the [LICENSE](LICENSE.md) file fo
 
 [link-packagist]: https://packagist.org/packages/egeatech/laravel-responses
 [link-downloads]: https://packagist.org/packages/egeatech/laravel-responses
-[link-travis]: https://travis-ci.org/egeatech/laravel-responses
 [link-author]: https://egeatech.com
