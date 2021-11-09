@@ -19,6 +19,10 @@ All notable changes to `LaravelResponses` will be documented in this file.
 - `$jsonResource` parameter is now `$responseFormatter`. Its type was changed from `JsonResource` to `string`, but is 
 expected to be a `JsonResource` instantiable class.
 
+## Version 1.0.3
+### Fixed
+- PHP version in `composer.json` file
+
 ## Version 1.0.2
 ### Fixed
 - Namespaces issues

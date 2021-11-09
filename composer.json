@@ -17,7 +17,7 @@
     "homepage": "https://github.com/EgeatechSRL/laravel-responses",
     "keywords": ["Laravel", "Responses"],
     "require": {
-        "php": "^7.4|8",
+        "php": "^7.4|^8.0",
         "illuminate/support": "^6|^7|^8",
         "egeatech/laravel-exceptions": "^1.1.0"
     },
