@@ -2,6 +2,10 @@
 
 All notable changes to `LaravelResponses` will be documented in this file.
 
+## Version 2.0.3
+### Fixed
+- PHP version in `composer.json` file
+
 ## Version 2.0.2
 ### Fixed
 - Syntax error in `*Response` classes
