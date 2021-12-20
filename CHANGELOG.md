@@ -2,6 +2,10 @@
 
 All notable changes to `LaravelResponses` will be documented in this file.
 
+## Unreleased
+### Added
+- Allowed to send to the user unformatted data (except for Model and Collection instances)
+
 ## Version 2.0.3
 ### Fixed
 - PHP version in `composer.json` file
