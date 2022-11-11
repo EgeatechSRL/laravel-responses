@@ -4,6 +4,13 @@ All notable changes to `LaravelResponses` will be documented in this file.
 
 ## Unreleased
 
+## 2.1.1
+### Added
+- Support for Laravel 9
+
+### Updated
+- Composer dependencies
+
 ## 2.1.0
 ### Added
 - Allowed to send to the user unformatted data (except for Model and Collection instances)
