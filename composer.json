@@ -18,7 +18,7 @@
     "keywords": ["Laravel", "Responses"],
     "require": {
         "php": "^7.4|^8.0",
-        "illuminate/support": "^6|^7|^8",
+        "illuminate/support": "^6|^7|^8|^9",
         "egeatech/laravel-exceptions": "^1.1.0"
     },
     "require-dev": {
