@@ -4,6 +4,12 @@ All notable changes to `LaravelResponses` will be documented in this file.
 
 ## Unreleased
 
+## 3.0.0
+
+### Removed
+
+- Support for PHP 7.4
+
 ## 2.1.1
 
 ### Added
