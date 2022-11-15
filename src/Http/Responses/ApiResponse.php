@@ -15,10 +15,10 @@ class ApiResponse extends JsonResponse
      *
      * @param null|Model|Collection|mixed $responseData
      * @param null|string $responseFormatter An Illuminate\Http\Resources\Json\JsonResource class instance
-     * @param int $httpHttpStatus
+     * @param int $httpStatus
      * @param null|LogicErrorException $logicException
      */
-    public function __construct($responseData, ?string $responseFormatter = null, int $httpHttpStatus = self::HTTP_OK, ?LogicErrorException $logicException = null)
+    public function __construct($responseData, ?string $responseFormatter = null, int $httpStatus = self::HTTP_OK, ?LogicErrorException $logicException = null)
     {
         if (!is_null($responseFormatter)) {
             if (!class_exists($responseFormatter)) {
@@ -47,19 +47,19 @@ class ApiResponse extends JsonResponse
         }
 
         $responseObject = [
-            'success' => $httpHttpStatus < self::HTTP_BAD_REQUEST,
+            'success' => $httpStatus < self::HTTP_BAD_REQUEST,
             'data' => $data,
         ];
 
         if ($logicException) {
-            $httpHttpStatus = $logicException->getCode();
+            $httpStatus = $logicException->getCode();
             $responseObject['errors'] = [
-                'general_error' => [$logicException->getMessageKey()]
+                basename(get_class($logicException)) => [$logicException->getMessageKey()]
             ];
         } else {
             $responseObject['errors'] = [];
         }
 
-        parent::__construct($responseObject, $httpHttpStatus);
+        parent::__construct($responseObject, $httpStatus);
     }
 }
