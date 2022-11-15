@@ -7,7 +7,7 @@ A package to provide some standardized response classes.
 
 ## Installation
 
-This package supports Laravel 6, 7 and 8 but requires **at least** PHP 7.4. 
+This package supports Laravel 6, 7, 8 and 9 but requires **at least** PHP 8.0. PHP 7.4 is supported up to version 2.1.1.  
 
 Via Composer
 
@@ -25,11 +25,11 @@ Here is the constructor for `ApiResponse`:
 
 ```php
 public function __construct(
-    # Either null, a valid Eloquent model or an \Illuminate\Support\Collection instance
-    ?\Illuminate\Database\Eloquent\Model $responseData,
+    # Either null, a valid Eloquent model or an \Illuminate\Support\Collection instance or a generic payload
+    mixed $responseData,
 
-    # A classFQN extending Laravel JsonResource instance, to be used to know how to map response data
-    string $responseFormatter,
+    # A classFQN extending Laravel JsonResource instance, to be used to know how to map response data. Can be null if data don't need formatting.
+    ?string $responseFormatter,
     
     # A valid HTTP status code, to be returned to the caller
     int $httpStatus = \Illuminate\Http\JsonResponse::HTTP_OK,
@@ -95,7 +95,7 @@ class TestController extends Controller
 }
 ```
 
-For the other class, usage is the same as long as you provide a `LenghtAwarePaginator` instance as first parameter.
+For the other class, its usage is the same as long as you provide a `LenghtAwarePaginator` instance as first parameter.
 
 ## Change log
 
