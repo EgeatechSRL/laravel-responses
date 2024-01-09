@@ -4,6 +4,12 @@ All notable changes to `LaravelResponses` will be documented in this file.
 
 ## Unreleased
 
+## 4.0.0
+
+### Added
+
+- Support for UP TO Laravel 10.x
+
 ## 3.0.0
 
 ### Removed
