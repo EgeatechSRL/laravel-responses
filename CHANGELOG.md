@@ -4,7 +4,13 @@ All notable changes to `LaravelResponses` will be documented in this file.
 
 ## Unreleased
 
-## 4.0.0
+## 4.0.1
+
+### Fixed
+
+## 4.0.1
+
+- Dependency issue
 
 ### Added
 
